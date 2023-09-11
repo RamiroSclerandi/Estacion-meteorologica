@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="styles.css">
+        <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+        <link rel="shortcut icon" href="climate.png">
+        <title>Estación meteorológica</title>
+    </head>
+    <body>
+    
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore-compat.js"></script>
+    <script src="firebase-config.js"></script>
+    <script>
+        $(function() {
+            $("#fecha").datepicker({
+                dateFormat: "dd/mm/yy", 
+                maxDate: new Date(2023, 8, 6),
+                minDate: new Date(2023, 7, 18) 
+            });
+        });
+    </script>
+        <main id="main" class="main">
+            <h1 id="titulo" class="titulo">Estación meteorológica montada en una raspberry pi</h1>
+            <div class="fecha-hora-medicion-contenedor">
+                <div id="fecha-hora-medicion" class="fecha-hora-medicion"></div>
+            </div>
+            <div class="contenedor_main">
+                <section id="temperatura" class="temperatura">
+                    <div id="contenedor_temperatura_sensor" class="contenedor">
+                        <h2 id="subtitulo_temperatura_sensor" class="subtitulo">
+                            Temperatura obtenida por el sensor BMP280
+                        </h2>
+                        <span id="valor_temperatura_sensor" class="valor"></span>   
+                    </div>
+                    <div id="contenedor_temperatura_API" class="contenedor">
+                        <h2 id="contenedor_temperatura_API" class="subtitulo">
+                            Temperatura obtenida por la API<span class="referencia" id="referencia">*</span>
+                        </h2>
+                        <span id="valor_temperatura_API" class="valor"></span> 
+                    </div>
+                    <p id="comparacion_temperatura" class="comparacion">
+                        El error absoulto y relativo del sensor es de:
+                        <span id="valor_comparacion_temperatura" class="valor_comparacion"></span> 
+                    </p>
+                </section>
+                <section id="humedad" class="humedad">
+                    <div id="contenedor_humedad_sensor" class="contenedor">
+                        <h2 id="subtitulo_humedad_sensor" class="subtitulo">
+                            Humedad obtenida por sensor DHT 11
+                        </h2>
+                        <span id="valor_humedad_sensor" class="valor"></span>   
+                    </div>
+                    <div id="contenedor_humedad_API" class="contenedor">
+                        <h2 id="subtitulo_humedad_API" class="subtitulo">
+                            Humedad obtenida por la API<span class="referencia" id="referencia">*</span>
+                        </h2>
+                        <span id="valor_humedad_API" class="valor"></span> 
+                    </div>
+                    <p id="comparacion_humedad" class="comparacion">
+                        El error absoulto y relativo del sensor es de:
+                        <span id="valor_comparacion_humedad" class="valor_comparacion"></span>
+                    </p>
+                </section>
+                <section id="presion" class="presion">
+                    <div id="contenedor_presion_sensor" class="contenedor">
+                        <h2 id="subtitulo_presion_sensor" class="subtitulo">
+                            Presión obtenida por el sensor BMP280
+                        </h2>
+                        <span id="valor_presion_sensor" class="valor"></span>   
+                    </div>
+                    <div id="contenedor_presion_API" class="contenedor">
+                        <h2 id="subtitulo_presion_API" class="subtitulo">
+                            Presión obtenida por la API<span class="referencia" id="referencia">*</span>
+                        </h2>
+                        <span id="valor_presion_API" class="valor"></span> 
+                    </div>
+                    <p id="comparacion_presion" class="comparacion">
+                        El error absoulto y relativo del sensor es de: 
+                        <span id="valor_comparacion_presion" class="valor_comparacion"></span>
+                    </p>
+                </section>
+            </div>
+            <div class="contenedor_calendario">
+                <form>
+                    <div class="fecha">
+                        <label>Seleccione una fecha para consultar </label>
+                        <input type="text" id="fecha" autocomplete="off" onchange="cargarHoraMediciones()" required>
+                    </div>
+                    <div class="hora">
+                        <label>Seleccione una hora para consultar </label>
+                        <select id="hora" required></select>
+                    </div>
+                    <button type="submit" value="submit">Consultar</button>
+                </form>
+            </div>
+        </main>
+    <footer id="footer" class="footer">
+        <p>
+            <span class="referencia" id="referencia">*</span>Los datos se obtuvieron utilizando la API
+            de OpenWheather: 
+            <a href="https://openweathermap.org/" target="_blank"> https://openweathermap.org/</a>
+        </p>
+    </footer>
+    <script src="index.js"></script>
+    </body>
+</html>
