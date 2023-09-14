@@ -26,11 +26,12 @@ El proyecto ha sido desarrollado utilizando las siguientes tecnologías:
 
 - Firebase Hosting: para alojar la aplicación web y permitir su acceso desde cualquier lugar.
 
-Instrucciones de Instalación
+Configuración de la aplicación
 
-Para replicar el proyecto se deben congifurar 2 archivos:
+Para replicar el proyecto se deben congifurar 3 archivos:
 - El archivo firebase-configs.js, donde se deben ingresar las credenciales para que se pueda inicializar Firebase y todas sus utilidades. Esto se obtiene ingresando a la configuración del proyecto, en la sección general, dentro de la consola de Firebase.
 - El archivo credenciales.json que se encuentra dentro de la carpeta Python, lo cual posibilita que los datos sensados sean subidos a la abse de datos de Firebase. Para encontrar estos datos se debe ingresar a la configuración del proyecto, en la sección cuentas de servicio y tocar el botón generar nueva clave privada, dentro de la consola de Firebase.
+- Dentro del index.html se debe modificar la etiqueta <script src="firebase-config.js"></script> por <script src="firebase-configs.js"></script>
 
 Estado del Proyecto
 
